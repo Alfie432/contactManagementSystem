@@ -66,4 +66,5 @@ Contact *addContact(Contact head, char name, char email, char phone)
     // temp->email = email;
     // temp->phone = phone;
     // temp->next = head;
+    // test
 }
