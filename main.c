@@ -9,14 +9,14 @@
 // define the contact struct, each contact will have this info stored in the contacts file
 typedef struct Contact
 {
-    char name[24];
-    char email[32];
-    char phone[16];
-    Contact next;
+    char name[N_MAX];
+    char email[E_MAX];
+    char phone[P_MAX];
+    Contact *next;
 } Contact;
 
 // functions prototypes
-Contact *addContact(Contact head, char name, char email, char phone);
+Contact *addContact(Contact *head, char name, char email, char phone);
 
 int main(void)
 {   
@@ -58,7 +58,7 @@ int main(void)
     return 0;
 }
 
-Contact *addContact(Contact head, char name, char email, char phone)
+Contact *addContact(Contact *head, char name, char email, char phone)
 {
     Contact *result = malloc(sizeof(Contact));
     result->next = head;
