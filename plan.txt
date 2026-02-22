@@ -1,0 +1,18 @@
+- ask for input (add, view, delete, restore)
+
+add:
+- get their info
+- add them as a contact to linked list
+
+view:
+- traverse the linked list
+- print each contact
+
+delete:
+- find requested contact
+- reroute the previous node to the next node
+- free (delete) the contact
+
+restore:
+- traverse linked list
+- remove every contact
