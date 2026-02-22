@@ -2,7 +2,9 @@
 #include <stdlib.h>
 
 // macros
-
+#define N_MAX 24
+#define E_MAX 32
+#define P_MAX 16
 
 // define the contact struct, each contact will have this info stored in the contacts file
 typedef struct Contact
@@ -12,9 +14,6 @@ typedef struct Contact
     char phone[16];
     Contact next;
 } Contact;
-
-char filename[] = "contacts.txt";
-FILE *file; // declare the file here, so it can be accessed anywhere
 
 // functions prototypes
 Contact *addContact(Contact head, char name, char email, char phone);
@@ -61,10 +60,7 @@ int main(void)
 
 Contact *addContact(Contact head, char name, char email, char phone)
 {
-    Contact *temp = malloc(sizeof(Contact));
-    // temp->name = name;
-    // temp->email = email;
-    // temp->phone = phone;
-    // temp->next = head;
-    // test
+    Contact *result = malloc(sizeof(Contact));
+    result->next = head;
+    // TODO: Fix this, it should assign values as well
 }
