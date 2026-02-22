@@ -1,3 +1,4 @@
 plan.txt
 main
-/.vscode
+.vscode/
+.gitignore
