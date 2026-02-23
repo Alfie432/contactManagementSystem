@@ -7,22 +7,28 @@
 #define P_MAX 16
 
 // define the contact struct, each contact will have this info stored in the contacts file
-typedef struct Contact
+typedef struct node
 {
     char name[N_MAX];
     char email[E_MAX];
     char phone[P_MAX];
-    struct Contact *next;
+    struct node *next;
 } Contact;
 
+typedef struct Values
+{
+    char name[N_MAX];
+    char email[E_MAX];
+    char phone[P_MAX];
+} Values;
+
 // functions prototypes
-Contact addContact(Contact *head, char name, char email, char phone);
+void addContact(Contact *head, char name, char email, char phone);
+void getInfo(void);
 
 int main(void)
 {   
-    Contact *head = NULL;
-    Contact *temp;
-
+    Contact *head = NULL; // an empty linked list
     int choice;
 
     // keep on asking for user choice until they decide to exit
@@ -37,6 +43,7 @@ int main(void)
         switch (choice)
         {
         case 1:
+
             break;
         case 2:
             break;
@@ -58,9 +65,10 @@ int main(void)
     return 0;
 }
 
-Contact addContact(Contact *head, char name, char email, char phone)
+void addContact(Contact *head, char nameToEnter, char emailToEnter, char phoneToEnter)
 {
     Contact *current = head; // start at the beginning of the linked list
+
 
     // go to the last node
     while (current->next != NULL) 
@@ -69,12 +77,20 @@ Contact addContact(Contact *head, char name, char email, char phone)
     }
 
     current->next = (Contact *) malloc(sizeof(Contact)); // create the new node
+
     if (current->next == NULL)
     {
         return; // there was an error allocating
-    }
-
+    } 
     
+    // asign values to it
+    // start at the memory address of current, go to the next node (the created one), and access the name/email/phone property
+    *current->next->name = nameToEnter;
+    *current->next->email = emailToEnter;
+    *current->next->phone = phoneToEnter;
+}
 
-    // TODO: Fix this, it should assign values as well
+void getInfo(void) 
+{
+    
 }
