@@ -12,11 +12,11 @@ typedef struct Contact
     char name[N_MAX];
     char email[E_MAX];
     char phone[P_MAX];
-    Contact *next;
+    struct Contact *next;
 } Contact;
 
 // functions prototypes
-Contact *addContact(Contact *head, char name, char email, char phone);
+Contact addContact(Contact *head, char name, char email, char phone);
 
 int main(void)
 {   
@@ -58,9 +58,23 @@ int main(void)
     return 0;
 }
 
-Contact *addContact(Contact *head, char name, char email, char phone)
+Contact addContact(Contact *head, char name, char email, char phone)
 {
-    Contact *result = malloc(sizeof(Contact));
-    result->next = head;
+    Contact *current = head; // start at the beginning of the linked list
+
+    // go to the last node
+    while (current->next != NULL) 
+    {
+        current = current->next;
+    }
+
+    current->next = (Contact *) malloc(sizeof(Contact)); // create the new node
+    if (current->next == NULL)
+    {
+        return; // there was an error allocating
+    }
+
+    
+
     // TODO: Fix this, it should assign values as well
 }
