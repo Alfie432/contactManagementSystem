@@ -23,7 +23,8 @@ typedef struct Values
 } Values;
 
 // functions prototypes
-void addContact(Contact *head, char name, char email, char phone);
+void clearBuffer(void);
+void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char phoneToEnter[]);
 void getInfo(void);
 void printAllContacts(Contact *head);
 
@@ -33,7 +34,7 @@ Values storage;
 int main(void)
 {   
     Contact *head = NULL; // an empty linked list
-    int choice;
+    int choice = 0;
 
     // keep on asking for user choice until they decide to exit
     while (1)
@@ -41,7 +42,7 @@ int main(void)
         printf("1) Add Contact\n2) View Contact\n3) View All Contacts\n4) Remove Contact\n5) Restore\n6) Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
-
+        clearBuffer();
 
         // decide what to do based of input
         switch (choice)
@@ -72,29 +73,49 @@ int main(void)
 }
 
 
-void addContact(Contact *head, char nameToEnter, char emailToEnter, char phoneToEnter)
+void clearBuffer(void)
+{
+    int ch;
+
+    while ((ch = getchar()) != '\n' && (ch != EOF))
+    {
+        // do nothing
+    }
+}
+
+
+void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char phoneToEnter[])
 {
     Contact *current = head; // start at the beginning of the linked list
 
 
     // go to the last node
-    while (current->next != NULL) 
+    if (current->next == NULL) // ! this line produces a segfault 
     {
-        current = current->next;
+        current->next = (Contact *) malloc(sizeof(Contact)); // create the new node
     }
+    else
+    {
+        while (current->next != NULL) 
+        {
+            current = current->next;
+        }
 
-    current->next = (Contact *) malloc(sizeof(Contact)); // create the new node
+        current->next = (Contact *) malloc(sizeof(Contact)); // create the new node 
+    }
 
     if (current->next == NULL)
     {
         return; // there was an error allocating
-    } 
+    }
+
     
     // asign values to it
     // start at the memory address of current, go to the next node (the created one), and access the name/email/phone property
-    *current->next->name = nameToEnter;
-    *current->next->email = emailToEnter;
-    *current->next->phone = phoneToEnter;
+    *current->next->name = *nameToEnter;
+    *current->next->email = *emailToEnter;
+    *current->next->phone = *phoneToEnter;
+    current->next->next = NULL;
 }
 
 
