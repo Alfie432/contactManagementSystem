@@ -4,7 +4,7 @@
 // macros
 #define N_MAX 24
 #define E_MAX 32
-#define P_MAX 16
+#define P_MAX 20
 
 // define the contact struct, each contact will have this info stored in the contacts file
 typedef struct node
@@ -25,6 +25,10 @@ typedef struct Values
 // functions prototypes
 void addContact(Contact *head, char name, char email, char phone);
 void getInfo(void);
+void printAllContacts(Contact *head);
+
+// define it here so it can be accessed by any function
+Values storage;
 
 int main(void)
 {   
@@ -43,11 +47,13 @@ int main(void)
         switch (choice)
         {
         case 1:
-
+            getInfo();
+            addContact(head, storage.name, storage.email, storage.phone);
             break;
         case 2:
             break;
         case 3:
+            printAllContacts(head);
             break;
         case 4:
             break;
@@ -64,6 +70,7 @@ int main(void)
 
     return 0;
 }
+
 
 void addContact(Contact *head, char nameToEnter, char emailToEnter, char phoneToEnter)
 {
@@ -90,7 +97,33 @@ void addContact(Contact *head, char nameToEnter, char emailToEnter, char phoneTo
     *current->next->phone = phoneToEnter;
 }
 
+
 void getInfo(void) 
 {
-    
+    // get the input
+    printf("Enter the contact's name: ");
+    fgets(storage.name, N_MAX, stdin);
+
+    printf("Enter the contact's email: ");
+    fgets(storage.email, E_MAX, stdin);
+
+    printf("Enter the contact's phone: ");
+    fgets(storage.phone, P_MAX, stdin);
+}
+
+
+void printAllContacts(Contact *head)
+{
+    // traverse until the end of the linked list
+    Contact *current = head;
+
+    while (current->next != NULL)
+    {
+        current = current->next;
+        printf("Name: %s\n", current->name);
+        printf("Email: %s\n", current->email);
+        printf("Phone: %s\n", current->phone);
+
+        printf("\n"); // just for spacing
+    }
 }
