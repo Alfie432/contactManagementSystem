@@ -88,27 +88,21 @@ void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char pho
 {
     Contact *current = head; // start at the beginning of the linked list
 
+    if (head == NULL)
+    {
+        head = current; // set it equal to the address of the first element
+        current = (Contact *) malloc(sizeof(Contact)); // create a node
+        current->next = NULL;
+    }
+
 
     // go to the last node
-    if (current->next == NULL) // ! this line produces a segfault 
+    while (current->next != NULL) 
     {
-        current->next = (Contact *) malloc(sizeof(Contact)); // create the new node
-    }
-    else
-    {
-        while (current->next != NULL) 
-        {
-            current = current->next;
-        }
-
-        current->next = (Contact *) malloc(sizeof(Contact)); // create the new node 
+        current = current->next;
     }
 
-    if (current->next == NULL)
-    {
-        return; // there was an error allocating
-    }
-
+    current->next = (Contact *) malloc(sizeof(Contact)); // create the new node
     
     // asign values to it
     // start at the memory address of current, go to the next node (the created one), and access the name/email/phone property
@@ -148,3 +142,5 @@ void printAllContacts(Contact *head)
         printf("\n"); // just for spacing
     }
 }
+
+
