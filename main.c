@@ -28,6 +28,8 @@ void clearBuffer(void);
 void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char phoneToEnter[]);
 void getInfo(void);
 void printAllContacts(Contact *head);
+void restore(Contact **head, int length);
+int countLength(Contact *head);
 
 // define it here so it can be accessed by any function
 Values storage;
@@ -61,6 +63,8 @@ int main(void)
         case 4:
             break;
         case 5: 
+            int counter = countLength(head);
+            restore(&head, counter);
             break;
         case 6:
             free(head);
@@ -133,6 +137,8 @@ void getInfo(void)
 
 void printAllContacts(Contact *head)
 {
+    printf("\n"); // just for spacing
+
     // traverse until the end of the linked list
     Contact *current = head;
 
@@ -148,3 +154,36 @@ void printAllContacts(Contact *head)
 }
 
 
+void restore(Contact **head, int length)
+{
+    Contact *current = *head;
+
+    // traverse the linked list
+    for (int i = 0; i < length; i++)
+    {
+        if (*head == NULL)
+        {
+            return; // we are at the end
+        }
+
+        *head = current->next;
+        free(current);
+    }
+
+    printf("\n"); // just for spacing
+}
+
+
+int countLength(Contact *head)
+{
+    int counter = 0;
+    Contact *current = head;
+
+    while (current->next != NULL)
+    {
+        current = current->next;
+        counter++;
+    }
+
+    return counter;
+}
