@@ -63,6 +63,7 @@ int main(void)
         case 5: 
             break;
         case 6:
+            free(head);
             return 0;
             break;
         default:
@@ -70,7 +71,7 @@ int main(void)
         }
     }
 
-
+    free(head); // just in case
     return 0;
 }
 
