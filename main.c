@@ -86,14 +86,15 @@ void clearBuffer(void)
 
 void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char phoneToEnter[])
 {
-    Contact *current = head; // start at the beginning of the linked list
+    Contact *current = head; // create a current struct, and it starts at the head element
 
     if (head == NULL)
     {
-        head = current; // set it equal to the address of the first element
-        current = (Contact *) malloc(sizeof(Contact)); // create a node
-        current->next = NULL;
+        head = (Contact *) malloc(sizeof(Contact));
+        head->next = NULL;
     }
+
+    current = head; // set it at the start of the linked list
 
 
     // go to the last node
@@ -113,7 +114,7 @@ void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char pho
 }
 
 
-void getInfo(void) 
+void getInfo(void)
 {
     // get the input
     printf("Enter the contact's name: ");
