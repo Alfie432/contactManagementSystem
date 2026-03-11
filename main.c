@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // macros
 #define N_MAX 24
@@ -33,7 +34,8 @@ Values storage;
 
 int main(void)
 {   
-    Contact *head = NULL; // an empty linked list
+    Contact *head = (Contact *) malloc(sizeof(Contact)); // an empty linked list
+    head->next = NULL;
     int choice = 0;
 
     // keep on asking for user choice until they decide to exit
@@ -87,13 +89,6 @@ void clearBuffer(void)
 void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char phoneToEnter[])
 {
     Contact *current = head; // create a current struct, and it starts at the head element
-
-    if (head == NULL)
-    {
-        head = (Contact *) malloc(sizeof(Contact));
-        head->next = NULL;
-    }
-
     current = head; // set it at the start of the linked list
 
 
@@ -107,24 +102,31 @@ void addContact(Contact *head, char nameToEnter[], char emailToEnter[], char pho
     
     // asign values to it
     // start at the memory address of current, go to the next node (the created one), and access the name/email/phone property
-    *current->next->name = *nameToEnter;
-    *current->next->email = *emailToEnter;
-    *current->next->phone = *phoneToEnter;
+    strcpy(current->next->name, nameToEnter);
+    strcpy(current->next->email, emailToEnter);
+    strcpy(current->next->phone, phoneToEnter);
     current->next->next = NULL;
 }
 
 
 void getInfo(void)
 {
+    printf("\n"); // just for spacing
+
     // get the input
     printf("Enter the contact's name: ");
     fgets(storage.name, N_MAX, stdin);
+    storage.name[strcspn(storage.name, "\n")] = '\0'; // removes the newline so the formatting isn't messed up
 
     printf("Enter the contact's email: ");
     fgets(storage.email, E_MAX, stdin);
+    storage.email[strcspn(storage.email, "\n")] = '\0';
 
     printf("Enter the contact's phone: ");
     fgets(storage.phone, P_MAX, stdin);
+    storage.phone[strcspn(storage.phone, "\n")] = '\0';
+
+    printf("\n"); // just for spacing
 }
 
 
