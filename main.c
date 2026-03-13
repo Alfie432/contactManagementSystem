@@ -64,6 +64,12 @@ int main(void)
         case 4:
             break;
         case 5: 
+            // error handling if the user tries to restore an empty list
+            if (head->next == NULL)
+            {
+                printf("\nContact List Empty.\n\n");
+            }
+
             counter = countLength(head);
             restore(head, counter);
             break;
@@ -141,6 +147,14 @@ void printAllContacts(Contact *head)
     printf("\nContact List:\n");
     printf("-------------\n"); 
 
+    // check if list is empty or not
+    if (head->next == NULL)
+    {
+        printf("\nNo saved contacts.\n\n");
+        return;
+    }
+
+
     // traverse until the end of the linked list
     Contact *current = head;
 
@@ -167,13 +181,15 @@ void restore(Contact *head, int length)
     {
         if (current->next == NULL)
         {   
-            printf("\nSystem Restored, all contacts deleted.\n"); 
+            printf("\nSystem Restored, all contacts deleted.\n\n"); // ! this line doesn't seem to be working
             return; // we are at the end
         }
 
         current = current->next;
         free(current);
     }
+
+    head->next = NULL; // points to nothing again
 }
 
 
