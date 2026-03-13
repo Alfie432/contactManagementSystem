@@ -166,15 +166,14 @@ void restore(Contact *head, int length)
     for (int i = 0; i < length; i++)
     {
         if (current->next == NULL)
-        {
+        {   
+            printf("\nSystem Restored, all contacts deleted.\n"); 
             return; // we are at the end
         }
 
-        head = current->next;
+        current = current->next;
         free(current);
     }
-
-    printf("\nSystem Restored, all contacts deleted.\n"); // just for spacing
 }
 
 
