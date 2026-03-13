@@ -157,15 +157,17 @@ void printAllContacts(Contact *head)
 
     // traverse until the end of the linked list
     Contact *current = head;
+    int orderNumber = 1;
 
     while (current->next != NULL)
     {
         current = current->next;
-        printf("Name: %s\n", current->name);
+        printf("%d. Name: %s\n", orderNumber, current->name);
         printf("Email: %s\n", current->email);
         printf("Phone: %s\n", current->phone);
 
         printf("\n"); // just for spacing
+        orderNumber++;
     }
 
     printf("\n"); // just for spacing
@@ -181,7 +183,8 @@ void restore(Contact *head, int length)
     {
         if (current->next == NULL)
         {   
-            printf("\nSystem Restored, all contacts deleted.\n\n"); // ! this line doesn't seem to be working
+            printf("\nSystem Restored, all contacts deleted.\n\n"); 
+            head->next = NULL; // points to nothing again
             return; // we are at the end
         }
 
