@@ -3,3 +3,16 @@
 
 This project uses clean professional grade code with proper abstraction and comments for readability and speed.
 
+Compile with...
+
+``` bash
+
+clang main.c functions.c -o main
+
+```
+
+and run with...
+
+``` bash
+./main
+```
