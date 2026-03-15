@@ -30,6 +30,9 @@ void getInfo(void);
 void printAllContacts(Contact *head);
 void restore(Contact *head, int length);
 int countLength(Contact *head);
+int getContactNum();
+void removeContact(Contact *head, int num);
+void printContact(Contact *head, int num);
 
 // define it here so it can be accessed by any function
 Values storage;
@@ -38,13 +41,14 @@ int main(void)
 {   
     Contact *head = (Contact *) malloc(sizeof(Contact)); // an empty linked list
     head->next = NULL;
-    int choice = 0;
+    int choice;
     int counter;
+    int contactNum;
 
     // keep on asking for user choice until they decide to exit
     while (1)
     {
-        printf("1) Add Contact\n2) View Contact\n3) View All Contacts\n4) Remove Contact\n5) Restore\n6) Exit\n");
+        printf("\n1) Add Contact\n2) View Contact\n3) View All Contacts\n4) Remove Contact\n5) Restore\n6) Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
         clearBuffer();
@@ -57,6 +61,8 @@ int main(void)
             addContact(head, storage.name, storage.email, storage.phone);
             break;
         case 2:
+            contactNum = getContactNum();
+            printContact(head, contactNum);
             break;
         case 3:
             printAllContacts(head);
@@ -126,7 +132,7 @@ void getInfo(void)
     printf("\n"); // just for spacing
 
     // get the input
-    printf("Enter the contact's name: ");
+    printf("Enter the contact's full name: ");
     fgets(storage.name, N_MAX, stdin);
     storage.name[strcspn(storage.name, "\n")] = '\0'; // removes the newline so the formatting isn't messed up
 
@@ -162,9 +168,7 @@ void printAllContacts(Contact *head)
     while (current->next != NULL)
     {
         current = current->next;
-        printf("%d. Name: %s\n", orderNumber, current->name);
-        printf("Email: %s\n", current->email);
-        printf("Phone: %s\n", current->phone);
+        printf("%d. %s\n", orderNumber, current->name);
 
         printf("\n"); // just for spacing
         orderNumber++;
@@ -208,4 +212,38 @@ int countLength(Contact *head)
     }
 
     return counter;
+}
+
+int getContactNum()
+{
+    int num;
+    printf("\nEnter the contact's order number: ");
+    scanf("%d", &num);
+    clearBuffer(); // get rid of the \n left in the buffer
+
+    return num;
+}
+
+void removeContact(Contact *head, int num)
+{
+
+}
+
+void printContact(Contact *head, int num)
+{
+    Contact *current = head;
+    printf("\n"); // just for spacing
+
+    for (int i = 0; i < (num - 1); i++)
+    {
+        current = current->next; // traverse until the user is reached
+    }
+
+    // once the user is reached, print their info
+    // ! not working
+    printf("Name: %s\n", current->name);
+    printf("Email: %s\n", current->email);
+    printf("Phone: %s\n", current->phone);    
+
+    printf("\n"); // just for spacing
 }
