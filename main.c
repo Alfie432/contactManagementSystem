@@ -234,13 +234,12 @@ void printContact(Contact *head, int num)
     Contact *current = head;
     printf("\n"); // just for spacing
 
-    for (int i = 0; i < (num - 1); i++)
+    for (int i = 0; i < num; i++)
     {
         current = current->next; // traverse until the user is reached
     }
 
     // once the user is reached, print their info
-    // ! not working
     printf("Name: %s\n", current->name);
     printf("Email: %s\n", current->email);
     printf("Phone: %s\n", current->phone);    
