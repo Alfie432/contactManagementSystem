@@ -137,13 +137,54 @@ int getContactNum()
     return num;
 }
 
-void removeContact(Contact *head, int num)
+void removeContact(Contact *head, int num, int maxLength)
 {
+    if (num > maxLength)
+    {
+        printf("\nNot a valid number.\n");
+        return;
+    }
 
+    Contact *current = head;
+    Contact *temp = head;
+    Contact *valuePtr;
+    Contact *toDelete;
+
+    printf("\n"); // just for spacing
+
+    for (int i = 0; i < num; i++)
+    {
+        // traverse to the contact to remove
+        current = current->next;
+    }
+
+    valuePtr = current->next; // store the next value of the desired contact to remove
+    toDelete = current;
+
+    // reset the current ptr
+    current = head;
+
+    // go to the previous node
+    for (int i = 0; i < (num - 1); i++)
+    {
+        current = current->next;
+    }
+
+    current->next = valuePtr;
+
+    // delete the missing
+    free(toDelete);
+    toDelete = NULL;
 }
 
-void printContact(Contact *head, int num)
+void printContact(Contact *head, int num, int maxLength)
 {
+    if (num > maxLength)
+    {
+        printf("\nNot a valid number.\n");
+        return;
+    }
+
     Contact *current = head;
     printf("\n"); // just for spacing
 

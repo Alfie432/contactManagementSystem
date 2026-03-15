@@ -32,7 +32,7 @@ void printAllContacts(Contact *head);
 void restore(Contact *head, int length);
 int countLength(Contact *head);
 int getContactNum();
-void removeContact(Contact *head, int num);
-void printContact(Contact *head, int num);
+void removeContact(Contact *head, int num, int maxLength);
+void printContact(Contact *head, int num, int maxLength);
 
 #endif
